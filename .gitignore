@@ -1,0 +1,17 @@
+# ignore .dist
+.dist
+
+# ignore .env
+.env
+
+# ignore .node_modules
+.node_modules
+
+# ignore pychache
+__pycache__
+
+# ignore ds_store
+.DS_Store
+
+#ignore .env.local
+.env.local
