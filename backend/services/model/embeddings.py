@@ -4,7 +4,7 @@ from pinecone import Pinecone
 
 
 # internal imports
-from models import Place
+from backend.models import Place
 
 # system
 import os
