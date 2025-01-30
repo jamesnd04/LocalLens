@@ -9,7 +9,7 @@ async function chat(message: Message) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify(message)
         });
         if (response.ok) {
             return response.json();

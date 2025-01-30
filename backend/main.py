@@ -8,7 +8,7 @@ from openai import OpenAI
 from pinecone import Pinecone
 
 # internal imports
-from models import Place, ProfileParams, Message
+from models import Place, ProfileParams, Message, Role
 from agent import (
     get_list_for_itinerary,
 )
@@ -31,14 +31,13 @@ def get_itinerary(profile_data: ProfileParams) -> list[Place]:
 
 
 @app.post("/chat")
-def chat_with_agent(message: Message) -> str:
-    response = client.chat.completeions.create(
+def chat_with_agent(message: Message) -> Message:
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful travel assistant."},
-            {"role": message.role, "content": message.content},
+            {"role": message.role.value, "content": message.content},
         ],
-        response_format=Message,
     )
 
-    return response.choices[0].message.content
+    return Message(role=Role.SYSTEM, content=response.choices[0].message.content)

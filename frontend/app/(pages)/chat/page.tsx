@@ -46,10 +46,9 @@ export default function ChatPage() {
      const newMessage = messageSchema.parse({ content: inputValue, role: "user" });
      setMessages([...currentMessages, newMessage]);
      currentMessages = [...currentMessages, newMessage];
-     let check = currentMessages[currentMessages.length - 1];
-     console.log("check the message contents " + check.content)
-     const newBotMessage = messageSchema.parse(await chat(currentMessages[currentMessages.length - 1]));
-     setBotMessage([newBotMessage]);
+     let response: Message = await chat(newMessage)
+     const newBotMessage = messageSchema.parse({ content: response.content, role: "assistant" });
+     setBotMessage([...botMessages,newBotMessage]);
      setInputValue("");
   }
   const clearChat = () => {
